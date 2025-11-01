@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+# from typing import List
 import heapq
 
 def reorganizeString(s: str) -> str:
