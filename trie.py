@@ -21,9 +21,14 @@ class Trie(object):
         for c, n in node.children.items():
             print(c)
             self.print(node=n)
-
-
-
+    def starts_with(self, prefix):
+        node = self.root
+        for c in prefix:
+            if c in node.children:
+                node = node.children[c]
+            else:
+                return False
+        return True
 
 
 if __name__ == "__main__":
@@ -34,5 +39,17 @@ if __name__ == "__main__":
     print("Inserted words into trie.")
 
     trie.print(trie.root)
+
+    tests = {
+        "ban": {"method": trie.starts_with, "args": ("ban",)},
+        "bon": {"method": trie.starts_with, "args": ("bon",)},
+        "banan": {"method": trie.starts_with, "args": ("banan",)},
+    }
+    for name, test in tests.items():
+        args = test.get("args", ())        # Get positional args, default to empty tuple
+        kwargs = test.get("kwargs", {})    # Get keyword args, default to empty dict
+        result = test["method"](*args, **kwargs)  # Unpack both args and kwargs
+        print(f"{name}: {result}")
+        print("---------")
     
 
