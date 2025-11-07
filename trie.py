@@ -17,10 +17,16 @@ class Trie(object):
             cur = cur.children[c]
         cur.is_end = True
 
-    def print(self, node):
+    def print(self, node, lvl=0):
+        chars = []
+        nodes = []
         for c, n in node.children.items():
-            print(c)
-            self.print(node=n)
+            chars.append(c)
+            nodes.append(n)
+        if chars:
+            print(f"{lvl}:[{','.join(chars)}]")
+        for n in nodes:
+            self.print(n, lvl+1)
 
     def starts_with(self, prefix):
         words = []
