@@ -43,6 +43,19 @@ class Trie(object):
 
         return words
 
+    def list_words(self):
+        words = []
+
+        def _dfs(current_node, path):
+            if current_node.is_end:
+                words.append(''.join(path))
+            for c, child_node in current_node.children.items():
+                _dfs(child_node, path + [c])
+
+        _dfs(self.root, [])
+
+        return words
+
 
 if __name__ == "__main__":
     trie = Trie()
@@ -54,5 +67,6 @@ if __name__ == "__main__":
     trie.print(trie.root)
     words = trie.starts_with('bat')
     print(f"'bat': {words}")
-    
 
+    allwords = trie.list_words()
+    print(f"ALL: {allwords}")
