@@ -47,17 +47,24 @@ def get_tree_height(root):
 
     while q:
         ## Can NOT iterate on the q directly, since it mutates.
+        qq = getq(q)
+        print(f"======\nqIN : {qq}")
         for _ in range(len(q)): 
             (cur, curh) = q.popleft()
+
             maxheight = max(maxheight, curh)
             if cur.left:
                 q.append( (cur.left, curh+1) )
             if cur.right:
                 q.append( (cur.right, curh+1) )
+            qq = getq(q)
+            print(f"qOUT: {qq}")
 
     return maxheight
 
-
+def getq(q):
+    vals = ", ".join([str(n.val) for (n,h) in q])
+    return f"[{vals}]"
 
 if __name__ == "__main__":
     # Generate the binary tree
