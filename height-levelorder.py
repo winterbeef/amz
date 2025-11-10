@@ -13,21 +13,21 @@ def create_binary_tree():
     root = TreeNode(1)
     
     # Level 2
-    root.left = TreeNode(2)
-    root.right = TreeNode(3)
+    root.left = TreeNode(22)
+    root.right = TreeNode(23)
     
     # Level 3
-    root.left.left = TreeNode(4)
-    root.left.right = TreeNode(5)
-    root.right.left = TreeNode(6)
-    root.right.right = TreeNode(7)
+    root.left.left = TreeNode(34)
+    root.left.right = TreeNode(35)
+    root.right.left = TreeNode(36)
+    root.right.right = TreeNode(37)
     
     # Level 4
-    root.right.left.left = TreeNode(12)
-    root.right.right.left = TreeNode(14)
-    root.right.right.right = TreeNode(99)
+    root.right.left.left = TreeNode(42)
+    root.right.right.left = TreeNode(44)
+    root.right.right.right = TreeNode(49)
 
-    root.right.right.right.left = TreeNode(98)
+    root.right.right.right.left = TreeNode(52)
     
     return root
 
@@ -42,20 +42,20 @@ def print_tree(node, level=0, prefix="Root: "):
 def get_tree_height(root):
     """
     """
-    q = deque([root])
-    height = 0
+    q = deque([(root, 1)])
+    maxheight = 0
 
     while q:
-        for n in range(len(q)): ## Can NOT iterate on the q directly, since it mutates.
-            cur = q.popleft()
-
+        ## Can NOT iterate on the q directly, since it mutates.
+        for _ in range(len(q)): 
+            (cur, curh) = q.popleft()
+            maxheight = max(maxheight, curh)
             if cur.left:
-                q.append(cur.left)
+                q.append( (cur.left, curh+1) )
             if cur.right:
-                q.append(cur.right)
-        height += 1
-    
-    return height
+                q.append( (cur.right, curh+1) )
+
+    return maxheight
 
 
 
