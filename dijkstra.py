@@ -3,24 +3,14 @@
 import heapq
 
 def dijkstra(graph, start_node):
-    """
-    Finds the shortest paths from a start_node to all other nodes in a graph
-    using Dijkstra's algorithm.
-
-    Args:
-        graph (dict): A dictionary representing the graph. 
-                      Keys are nodes, values are dictionaries of neighbors 
-                      and their respective edge weights (e.g., {'A': {'B': 1, 'C': 5}}).
-        start_node: The starting node for finding shortest paths.
-
-    Returns:
-        tuple: A tuple containing two dictionaries:
-               - distances (dict): Shortest distances from start_node to all other nodes.
-               - predecessors (dict): Predecessor node on the shortest path for each node.
-    """
+    # total distance from start to node; distance from start is 0
     distances = {node: float('inf') for node in graph}
     distances[start_node] = 0
+
+    # this is updated as the node "upstream" on the shortest current path
     predecessors = {node: None for node in graph}
+
+    
     priority_queue = [(0, start_node)]  # (distance, node)
 
     while priority_queue:
